@@ -32,4 +32,15 @@ void* allocate_memory_with_normal_allocator(normal_allocator* allocator, size_t 
 void deallocate_memory_with_normal_allocator(normal_allocator* allocator, void* ptr);
 void destroy_normal_allocator(normal_allocator* allocator);
 
+typedef void* (*allocate_memory_callback)(void* allocator, size_t size);
+typedef void (*deallocate_memory_callback)(void* allocator, void* ptr);
+
+struct allocator_dependency_package {
+	void* allocator,
+	allocate_memory_callback allocate,
+	deallocate_memory_callback deallocate
+};
+
+typedef struct allocator_dependency_package allocator_dependency_package;
+
 #endif
